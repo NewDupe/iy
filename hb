@@ -6,6 +6,16 @@ local StarterGui = game:GetService("StarterGui")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+-- Matikan semua suara di game
+local locations = {workspace, game:GetService("ReplicatedStorage"), playerGui}
+for _, loc in ipairs(locations) do
+	for _, sound in ipairs(loc:GetDescendants()) do
+		if sound:IsA("Sound") then
+			sound.Volume = 0
+		end
+	end
+end
+
 -- Sembunyikan semua UI bawaan Roblox (leaderboard, chat, dll)
 StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.All, false)
 
@@ -73,7 +83,7 @@ barBackground.Name = "BarBackground"
 local barCorner = Instance.new("UICorner", barBackground)
 barCorner.CornerRadius = UDim.new(0, 999)
 
--- Loading bar isi
+-- Loading bar isi (efek berulang loading)
 local fillBar = Instance.new("Frame")
 fillBar.Size = UDim2.new(0.3, 0, 1, 0)
 fillBar.Position = UDim2.new(-0.3, 0, 0, 0)
@@ -103,7 +113,7 @@ end)
 -- SpeedDupeV2 (RGB, kecil, tebal, lebih bawah)
 local bottomText = Instance.new("TextLabel")
 bottomText.AnchorPoint = Vector2.new(0.5, 0.5)
-bottomText.Position = UDim2.new(0.5, 0, 0.76, 0) -- <- digeser lebih ke bawah
+bottomText.Position = UDim2.new(0.5, 0, 0.76, 0) -- posisi digeser lebih ke bawah
 bottomText.Size = UDim2.new(0.4, 0, 0.05, 0)
 bottomText.BackgroundTransparency = 1
 bottomText.Text = "SpeedDupeV2"
